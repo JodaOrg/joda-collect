@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+
+<document>
+
+ <properties>
+  <title>Joda Collect</title>
+  <author>Stephen Colebourne</author>
+ </properties>
+
+ <body>
+
+<section name="Joda Collect">
+<p>
+Joda-Collect provides collections that are not present in the JDK or <a href="http://code.google.com/p/guava-libraries/">Google Guava</a>.
+</p>
+<p>
+The project is related to <a href="http://www.joda.org/joda-primitives/">Joda-Primitives</a> which provides primitive versions of the collection interfaces.
+This project is separate, as the use cases are likely to be different.
+</p>
+<p>
+Version 0.7 is the latest version - <a href="download.html">Download now</a>
+</p>
+<p>
+Joda-Collect is licensed under the business-friendly <a href="licensecover.html">Apache 2.0 licence</a>.
+</p>
+</section>
+
+
+<section name="Contents">
+<p>
+Joda-Collect contains the following collections:
+</p>
+<ul>
+<li><b>Grid</b>. A grid data structure, providing access to its values by row and column.
+This is similar to Guava's `Table`, but uses `int` for the row and column, allowing optimisations.
+Mutable and immutable implementations are provided in sparse and dense variations.
+</li>
+</ul>
+</section>
+
+
+<section name="Documentation">
+<p>
+Various documentation is available:
+<ul>
+<li>The <a href="apidocs/index.html">Javadoc</a></li>
+<li>The <a href="https://github.com/JodaOrg/joda-collect">GitHub</a> source repository</li>
+</ul>
+</p>
+</section>
+
+
+<section name="Releases">
+<p>
+There are no full releases yet!
+<a href="download.html">Release 0.7</a>
+is the current development release intended for feedback.
+The code is fully tested, but there may yet be bugs and the API may yet change.
+There should be no great reason why it cannot be used in production if you can cope with future API change.
+</p>
+<p>
+The project runs on JDK 1.6 and requires <a href="http://code.google.com/p/guava-libraries/">Google Guava</a>.
+</p>
+<p>
+Available in <a href="http://search.maven.org/#artifactdetails|org.joda|joda-collect|0.7|jar">Maven Central</a>.
+</p>
+</section>
+
+
+<section name="Support">
+<p>
+Support on bugs, library usage or enhancement requests is available on a best efforts basis.
+</p>
+<p>
+To suggest enhancements or contribute, please <a href="https://github.com/JodaOrg/joda-collect">fork the source code</a> on GitHub.
+Alternatively, use GitHub <a href="https://github.com/JodaOrg/joda-collect/issues">issues</a>.
+</p>
+<p>
+<br />
+</p>
+<p>
+<br />
+</p>
+<p>
+<br />
+</p>
+</section>
+</body>
+</document>
