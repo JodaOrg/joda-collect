@@ -15,9 +15,11 @@
  */
 package org.joda.collect.array;
 
+import java.util.AbstractList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Immutable implementation of an array data structure for primitive {@code double}.
@@ -168,52 +170,25 @@ public final class ImmutableDoubleArray implements Iterable<Double> {
 
     //-----------------------------------------------------------------------
     /**
-     * Obtains an immutable array by copying an array.
+     * Obtains an immutable array by wrapping an array.
      * <p>
-     * This method is safe, because the input array is copied.
+     * This method is inherently unsafe as it relies on good behaviour by callers.
+     * Callers must never make any changes to the passed in array after calling this method.
+     * Doing so would violate the immutability of this class.
      * 
-     * @param array  the array to copy, no nulls, not null
+     * @param array  the array to assign, not null
      * @return the immutable array, not null
      */
-    public static ImmutableDoubleArray copyOf(Double[] array) {
+    public static ImmutableDoubleArray ofUnsafe(double[] array) {
         if (array == null) {
             throw new IllegalArgumentException("Array must not be null");
         }
         if (array.length == 0) {
             return EMPTY;
         }
-        double[] primitive = new double[array.length];
-        for (int i = 0; i < array.length; i++) {
-            primitive[i] = array[i].doubleValue();
-        }
-        return new ImmutableDoubleArray(primitive);
+        return new ImmutableDoubleArray(array);
     }
 
-    /**
-     * Obtains an immutable array by copying values from a collection.
-     * <p>
-     * This method is safe, because the input array is copied.
-     * 
-     * @param coll  the collection to copy, no nulls, not null
-     * @return the immutable array, not null
-     */
-    public static ImmutableDoubleArray copyOf(Collection<Double> coll) {
-        if (coll == null) {
-            throw new IllegalArgumentException("Collection must not be null");
-        }
-        Iterator<Double> it = coll.iterator();
-        if (it.hasNext() == false) {
-            return EMPTY;
-        }
-        double[] primitive = new double[coll.size()];
-        int i = 0;
-        for (Double value : coll) {
-            primitive[i++] = value.doubleValue();
-        }
-        return new ImmutableDoubleArray(primitive);
-    }
-
-    //-----------------------------------------------------------------------
     /**
      * Obtains an immutable array by copying an array.
      * <p>
@@ -268,24 +243,52 @@ public final class ImmutableDoubleArray implements Iterable<Double> {
         return new ImmutableDoubleArray(Arrays.copyOfRange(array, fromIndexInclusive, toIndexExclusive));
     }
 
+    //-----------------------------------------------------------------------
     /**
-     * Obtains an immutable array by wrapping an array.
+     * Obtains an immutable array by copying an array.
      * <p>
-     * This method is inherently unsafe as it relies on good behaviour by callers.
-     * Callers must never make any changes to the passed in array after calling this method.
-     * Doing so would violate the immutability of this class.
+     * This method is safe, because the input array is copied.
      * 
-     * @param array  the array to assign, not null
+     * @param array  the array to copy, no nulls, not null
      * @return the immutable array, not null
      */
-    public static ImmutableDoubleArray wrapOf(double[] array) {
+    public static ImmutableDoubleArray copyOf(Double[] array) {
         if (array == null) {
             throw new IllegalArgumentException("Array must not be null");
         }
         if (array.length == 0) {
             return EMPTY;
         }
-        return new ImmutableDoubleArray(array);
+        double[] primitive = new double[array.length];
+        for (int i = 0; i < array.length; i++) {
+            primitive[i] = array[i].doubleValue();
+        }
+        return new ImmutableDoubleArray(primitive);
+    }
+
+    /**
+     * Obtains an immutable array by copying values from a collection.
+     * <p>
+     * This method is safe, because the input array is copied.
+     * The value is extracted from each element using {@link Number#doubleValue()}.
+     * 
+     * @param coll  the collection to copy, no nulls, not null
+     * @return the immutable array, not null
+     */
+    public static ImmutableDoubleArray copyOf(Collection<? extends Number> coll) {
+        if (coll == null) {
+            throw new IllegalArgumentException("Collection must not be null");
+        }
+        Iterator<? extends Number> it = coll.iterator();
+        if (it.hasNext() == false) {
+            return EMPTY;
+        }
+        double[] primitive = new double[coll.size()];
+        int i = 0;
+        for (Number value : coll) {
+            primitive[i++] = value.doubleValue();
+        }
+        return new ImmutableDoubleArray(primitive);
     }
 
     //-----------------------------------------------------------------------
@@ -343,10 +346,12 @@ public final class ImmutableDoubleArray implements Iterable<Double> {
      * @return true if the value is contained in this array
      */
     public boolean contains(double value) {
-        long bits = Double.doubleToLongBits(value);
-        for (int i = 0; i < array.length; i++) {
-            if (Double.doubleToLongBits(value) == bits) {
-                return true;
+        if (array.length > 0) {
+            long bits = Double.doubleToLongBits(value);
+            for (int i = 0; i < array.length; i++) {
+                if (Double.doubleToLongBits(value) == bits) {
+                    return true;
+                }
             }
         }
         return false;
@@ -362,10 +367,12 @@ public final class ImmutableDoubleArray implements Iterable<Double> {
      * @return the index of the value, -1 if not found
      */
     public int indexOf(double value) {
-        long bits = Double.doubleToLongBits(value);
-        for (int i = 0; i < array.length; i++) {
-            if (Double.doubleToLongBits(value) == bits) {
-                return i;
+        if (array.length > 0) {
+            long bits = Double.doubleToLongBits(value);
+            for (int i = 0; i < array.length; i++) {
+                if (Double.doubleToLongBits(value) == bits) {
+                    return i;
+                }
             }
         }
         return -1;
@@ -381,13 +388,73 @@ public final class ImmutableDoubleArray implements Iterable<Double> {
      * @return the index of the value, -1 if not found
      */
     public int lastIndexOf(double value) {
-        long bits = Double.doubleToLongBits(value);
-        for (int i = array.length - 1; i >= 0; i--) {
-            if (Double.doubleToLongBits(value) == bits) {
-                return i;
+        if (array.length > 0) {
+            long bits = Double.doubleToLongBits(value);
+            for (int i = array.length - 1; i >= 0; i--) {
+                if (Double.doubleToLongBits(value) == bits) {
+                    return i;
+                }
             }
         }
         return -1;
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a copy of this array with the value at the specified index changed.
+     * <p>
+     * This is equivalent to returning a new instance with {@code array[index] = newValue}.
+     * 
+     * @param index  the zero-based index to set
+     * @param newValue  the new value to store
+     * @return a copy of this array with the value at the index changed
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    public ImmutableDoubleArray with(int index, double newValue) {
+        if (array.length == 0 || Double.doubleToLongBits(array[index]) == Double.doubleToLongBits(newValue)) {
+            return this;
+        }
+        double[] result = array.clone();
+        result[index] = newValue;
+        return new ImmutableDoubleArray(result);
+    }
+
+    /**
+     * Returns an array that combines this array and the specified array.
+     * <p>
+     * The result will have a length equal to {@code this.size() + arrayToConcat.length}.
+     * 
+     * @param arrayToConcat  the array to add to the end of this array
+     * @return a copy of this array with the specified array added at the end
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    public ImmutableDoubleArray concat(double[] arrayToConcat) {
+        if (arrayToConcat == null) {
+            throw new IllegalArgumentException("Array must not be null");
+        }
+        if (arrayToConcat.length == 0) {
+            return this;
+        }
+        double[] result = new double[array.length + arrayToConcat.length];
+        System.arraycopy(array, 0, result, 0, array.length);
+        System.arraycopy(arrayToConcat, 0, result, array.length, arrayToConcat.length);
+        return new ImmutableDoubleArray(result);
+    }
+
+    /**
+     * Returns an array that combines this array and the specified array.
+     * <p>
+     * The result will have a length equal to {@code this.size() + newArray.length}.
+     * 
+     * @param arrayToConcat  the new array to add to the end of this array
+     * @return a copy of this array with the specified array added at the end
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
+    public ImmutableDoubleArray concat(ImmutableDoubleArray arrayToConcat) {
+        if (array.length == 0) {
+            return arrayToConcat;
+        }
+        return concat(arrayToConcat.array);
     }
 
     //-----------------------------------------------------------------------
@@ -411,8 +478,8 @@ public final class ImmutableDoubleArray implements Iterable<Double> {
      * @throws IndexOutOfBoundsException if the index is invalid
      */
     public ImmutableDoubleArray subArray(int fromIndexInclusive, int toIndexExclusive) {
-        double[] sub = Arrays.copyOfRange(array, fromIndexInclusive, toIndexExclusive);
-        return new ImmutableDoubleArray(sub);  // TODO better
+        double[] result = Arrays.copyOfRange(array, fromIndexInclusive, toIndexExclusive);
+        return new ImmutableDoubleArray(result);
     }
 
     //-----------------------------------------------------------------------
@@ -424,9 +491,12 @@ public final class ImmutableDoubleArray implements Iterable<Double> {
      * @return a sorted copy of this array, not null
      */
     public ImmutableDoubleArray sorted() {
-        double[] clone = array.clone();
-        Arrays.sort(clone);
-        return new ImmutableDoubleArray(clone);
+        if (array.length < 2) {
+            return this;
+        }
+        double[] result = array.clone();
+        Arrays.sort(result);
+        return new ImmutableDoubleArray(result);
     }
 
     /**
@@ -441,6 +511,9 @@ public final class ImmutableDoubleArray implements Iterable<Double> {
     public double min() {
         if (array.length == 0) {
             throw new IllegalStateException("Unable to find minimum of an empty array");
+        }
+        if (array.length == 1) {
+            return array[0];
         }
         double min = Double.POSITIVE_INFINITY;
         for (int i = 0; i < array.length; i++) {
@@ -461,6 +534,9 @@ public final class ImmutableDoubleArray implements Iterable<Double> {
     public double max() {
         if (array.length == 0) {
             throw new IllegalStateException("Unable to find maximum of an empty array");
+        }
+        if (array.length == 1) {
+            return array[0];
         }
         double max = Double.NEGATIVE_INFINITY;
         for (int i = 0; i < array.length; i++) {
@@ -499,23 +575,37 @@ public final class ImmutableDoubleArray implements Iterable<Double> {
         return destination;
     }
 
+    /**
+     * Returns the underlying primitive array.
+     * <p>
+     * This method is inherently unsafe as it relies on good behaviour by callers.
+     * Callers must never make any changes to the array returned by this method.
+     * Doing so would violate the immutability of this class.
+     * 
+     * @return the raw array, not null
+     */
+    public double[] toArrayUnsafe() {
+        return array;
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Returns a list equivalent to this array.
+     * 
+     * @return a list wrapping this array, not null
+     */
+    public List<Double> toList() {
+        return new ImmList(array);
+    }
+
+    /**
+     * Returns an iterator equivalent to this array.
+     * 
+     * @return an iterator wrapping this array, not null
+     */
     @Override
     public Iterator<Double> iterator() {
-        return new Iterator<Double>() {
-            private int index;
-            @Override
-            public boolean hasNext() {
-                return index < array.length;
-            }
-            @Override
-            public Double next() {
-                return array[index++];
-            }
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException("Unable to remove from ImmutableDoubleArray");
-            }
-        };
+        return new ImmIterator(array);
     }
 
     //-----------------------------------------------------------------------
@@ -536,6 +626,55 @@ public final class ImmutableDoubleArray implements Iterable<Double> {
     @Override
     public String toString() {
         return Arrays.toString(array);
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Immutable {@code Iterator} representation of the array.
+     */
+    class ImmIterator implements Iterator<Double> {
+        private final double[] array;
+        private int index;
+
+        public ImmIterator(double[] array) {
+            this.array = array;
+        }
+        @Override
+        public boolean hasNext() {
+            return index < array.length;
+        }
+        @Override
+        public Double next() {
+            return array[index++];
+        }
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("Unable to remove from ImmutableDoubleArray");
+        }
+    }
+
+    //-----------------------------------------------------------------------
+    /**
+     * Immutable {@code List} representation of the array.
+     */
+    class ImmList extends AbstractList<Double> {
+        private final double[] array;
+
+        ImmList(double[] array) {
+            this.array = array;
+        }
+        @Override
+        public Double get(int index) {
+            return array[index];
+        }
+        @Override
+        public int size() {
+            return array.length;
+        }
+        @Override
+        protected void removeRange(int fromIndex, int toIndex) {
+            throw new UnsupportedOperationException("Unable to remove from ImmutableDoubleArray");
+        }
     }
 
 }
