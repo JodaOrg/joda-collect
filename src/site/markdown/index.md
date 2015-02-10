@@ -3,7 +3,7 @@
 **Joda-Collect** provides collections that are not present in the JDK or
 [Google Guava](http://code.google.com/p/guava-libraries/).
 
-The JDK and Guava contain many collection classes, but occasionally there is something misisng.
+The JDK and Guava contain many collection classes, but occasionally there is something missing.
 This project provides a home for those collections.
 
 Joda-Collect is licensed under the business-friendly [Apache 2.0 licence](license.html).
