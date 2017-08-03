@@ -70,6 +70,7 @@ public class TestDenseImmutableGrid extends AbstractTestImmutableGrid {
         assertEquals(test.containsValue(Integer.valueOf(6)), false);
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     public void test_equalsHashCode() {
         SparseGrid<String> hash = SparseGrid.create(2, 2);
         hash.put(0, 0, "Hello");

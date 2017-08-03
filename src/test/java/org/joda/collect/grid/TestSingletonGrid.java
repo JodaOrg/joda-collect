@@ -93,6 +93,7 @@ public class TestSingletonGrid extends AbstractTestGrid {
         assertEquals(test.containsValue(Integer.valueOf(6)), false);
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     public void test_equalsHashCode() {
         ImmutableGrid<String> test = create();
         assertEquals(test.equals(test), true);

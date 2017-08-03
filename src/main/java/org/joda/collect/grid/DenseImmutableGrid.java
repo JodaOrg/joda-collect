@@ -166,7 +166,7 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
     static class Cells<V> extends AbstractSet<Cell<V>> {
         private final DenseImmutableGrid<V> grid;
 
-        public Cells(DenseImmutableGrid<V> grid) {
+        Cells(DenseImmutableGrid<V> grid) {
             this.grid = grid;
         }
 

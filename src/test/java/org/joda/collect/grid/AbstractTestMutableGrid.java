@@ -116,6 +116,7 @@ public abstract class AbstractTestMutableGrid extends AbstractTestGrid {
         assertEquals(test.containsValue(Integer.valueOf(6)), false);
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     public void test_equalsHashCode() {
         Grid<String> test = create3x3();
         test.put(0, 0, "Hello");
@@ -335,6 +336,7 @@ public abstract class AbstractTestMutableGrid extends AbstractTestGrid {
         assertEquals(test.cells().contains(ImmutableCell.of(1, 1, "")), false);
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     @Test(expectedExceptions = ClassCastException.class)
     public void test_cells_contains_nonCell() {
         Grid<String> test = create3x3();
@@ -548,6 +550,7 @@ public abstract class AbstractTestMutableGrid extends AbstractTestGrid {
         assertEquals(test.get(0, 1), "World");
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     @Test(expectedExceptions = ClassCastException.class)
     public void test_cells_remove_nonCell() {
         Grid<String> test = create3x3();

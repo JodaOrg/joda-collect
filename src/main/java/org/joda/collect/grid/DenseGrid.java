@@ -212,7 +212,7 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
     static class Cells<V> extends AbstractSet<Cell<V>> {
         private final DenseGrid<V> grid;
 
-        public Cells(DenseGrid<V> grid) {
+        Cells(DenseGrid<V> grid) {
             this.grid = grid;
         }
 

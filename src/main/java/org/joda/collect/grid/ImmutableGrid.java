@@ -141,7 +141,7 @@ public abstract class ImmutableGrid<V> extends AbstractGrid<V> {
     /**
      * Obtains an immutable grid by copying another grid.
      * <p>
-     * If you need to change the row-column count, use {@link #of(int, int, Iterable)}
+     * If you need to change the row-column count, use {@link #copyOf(int, int, Iterable)}
      * passing in the set of cells from the grid.
      * 
      * @param <R> the type of the value

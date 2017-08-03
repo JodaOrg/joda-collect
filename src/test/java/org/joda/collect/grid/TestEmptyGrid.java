@@ -42,6 +42,7 @@ public class TestEmptyGrid extends AbstractTestGrid {
         assertEquals(test.containsValue(Integer.valueOf(6)), false);
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     public void test_equalsHashCode_0x0() {
         ImmutableGrid<String> test = ImmutableGrid.of();
         assertEquals(test.equals(test), true);
@@ -56,6 +57,7 @@ public class TestEmptyGrid extends AbstractTestGrid {
         assertEquals(test.hashCode(), test.cells().hashCode());
     }
 
+    @SuppressWarnings("unlikely-arg-type")
     public void test_equalsHashCode_1x2() {
         ImmutableGrid<String> test = ImmutableGrid.of(1, 2);
         assertEquals(test.equals(test), true);

@@ -80,6 +80,7 @@ public class TestImmutableCell {
     }
 
     //-----------------------------------------------------------------------
+    @SuppressWarnings("unlikely-arg-type")
     public void test_equalsHashCode() {
         Cell<String> test = ImmutableCell.of(1, 2, "Hello");
         assertEquals(test.equals(test), true);
