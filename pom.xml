@@ -9,7 +9,7 @@
   <artifactId>joda-collect</artifactId>
   <packaging>jar</packaging>
   <name>Joda-Collect</name>
-  <version>0.8</version>
+  <version>0.9-SNAPSHOT</version>
   <description>Additional collections</description>
   <url>http://www.joda.org/joda-collect/</url>
 
