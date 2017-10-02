@@ -105,6 +105,9 @@
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
               <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
             </manifest>
+            <manifestEntries>
+              <Automatic-Module-Name>org.joda.collect</Automatic-Module-Name>
+            </manifestEntries>
           </archive>
         </configuration>
       </plugin>
