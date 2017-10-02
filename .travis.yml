@@ -18,4 +18,4 @@ after_success:
 # secure keys for GITHUB_TOKEN
 env:
   global:
-  - secure: oTTMStseIPcIpAgRVB3xEHAfFN+GKlJizke4XGk+CpPYqie7saxnJV+44vn1ln+/Hwa/dmc2zLZxQbjGpu4IrEyUESDbBBLal991IR+cOrvqDPXv+jYqrUqUqRCBd1NQz5C/A+2qVIVuY3hTl/HEnjNRia6DBN8rpPqVFmuA5IU=
+  - secure: G0LQgQPayjbN6TLoLtIkqljkBge8fIH1lRL4Mn+aroTgLgE60gaJJfWPc26wHwPKRP2bMSl5peQUEDLhJ/FA7G+o4HSrGzqU0h7PX2R6S7niYgPuSVUc/hhUWb0WFoterXSAbbS3IWkEkzHoXKizhTO6mffy8/E60ZzZ8gGHMqM=
