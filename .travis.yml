@@ -1,12 +1,21 @@
-# This file enables the Travis continuous integration system, which
-# automatically builds and tests the project for each GitHub commit or 
-# pull request on three separate JDKs.
-#
-# For more information, see https://travis-ci.org
-
 sudo: false
-
 language: java
-
-jdk: 
-  - oraclejdk7
+jdk:
+  - oraclejdk8
+  - openjdk7
+cache:
+  directories:
+    - "$HOME/.m2/repository"
+before_cache:
+  - rm -rf $HOME/.m2/repository/org/joda/collect
+# install
+install:
+  - mvn --version
+script:
+  - mvn install -e -B
+after_success:
+  - if [[ $TRAVIS_TAG =~ ^v.*$ ]] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_JDK_VERSION" == "oraclejdk8" ]; then travis_wait 40 mvn site-deploy -e -B --settings .github/maven-settings.xml; fi
+# secure keys for GITHUB_TOKEN
+env:
+  global:
+  - secure: oTTMStseIPcIpAgRVB3xEHAfFN+GKlJizke4XGk+CpPYqie7saxnJV+44vn1ln+/Hwa/dmc2zLZxQbjGpu4IrEyUESDbBBLal991IR+cOrvqDPXv+jYqrUqUqRCBd1NQz5C/A+2qVIVuY3hTl/HEnjNRia6DBN8rpPqVFmuA5IU=
