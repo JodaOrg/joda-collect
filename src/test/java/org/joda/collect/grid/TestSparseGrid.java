@@ -15,12 +15,9 @@
  */
 package org.joda.collect.grid;
 
-import org.testng.annotations.Test;
-
 /**
  * Test SparseGrid.
  */
-@Test
 public class TestSparseGrid extends AbstractTestMutableGrid {
 
     @Override

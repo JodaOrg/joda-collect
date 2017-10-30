@@ -15,87 +15,91 @@
  */
 package org.joda.collect.grid;
 
-import static org.testng.Assert.assertEquals;
 
-import org.testng.annotations.Test;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
  * Test EmptyGrid.
  */
-@Test
 public class TestEmptyGrid extends AbstractTestGrid {
 
+    @Test
     public void test_factory() {
         ImmutableGrid<String> test = ImmutableGrid.of();
-        assertEquals(test.rowCount(), 0);
-        assertEquals(test.columnCount(), 0);
+        assertEquals(0, test.rowCount());
+        assertEquals(0, test.columnCount());
         checkGrid(test);
-        assertEquals(test.toString(), "[0x0:]");
+        assertEquals("[0x0:]", test.toString());
     }
 
     //-----------------------------------------------------------------------
+    @Test
     public void test_containsValue_Object() {
         ImmutableGrid<String> test = ImmutableGrid.of();
-        assertEquals(test.containsValue("Hello"), false);
-        assertEquals(test.containsValue(""), false);
-        assertEquals(test.containsValue(null), false);
-        assertEquals(test.containsValue(Integer.valueOf(6)), false);
+        assertEquals(false, test.containsValue("Hello"));
+        assertEquals(false, test.containsValue(""));
+        assertEquals(false, test.containsValue(null));
+        assertEquals(false, test.containsValue(Integer.valueOf(6)));
     }
 
     @SuppressWarnings("unlikely-arg-type")
+    @Test
     public void test_equalsHashCode_0x0() {
         ImmutableGrid<String> test = ImmutableGrid.of();
-        assertEquals(test.equals(test), true);
-        assertEquals(test.equals(ImmutableGrid.of()), true);
-        assertEquals(test.equals(SparseGrid.create(0, 0)), true);
-        assertEquals(test.equals(SparseGrid.create(1, 1)), false);
-        assertEquals(test.equals(DenseGrid.create(0, 0)), true);
-        assertEquals(test.equals(DenseGrid.create(1, 1)), false);
-        assertEquals(test.equals(null), false);
-        assertEquals(test.equals(""), false);
+        assertEquals(true, test.equals(test));
+        assertEquals(true, test.equals(ImmutableGrid.of()));
+        assertEquals(true, test.equals(SparseGrid.create(0, 0)));
+        assertEquals(false, test.equals(SparseGrid.create(1, 1)));
+        assertEquals(true, test.equals(DenseGrid.create(0, 0)));
+        assertEquals(false, test.equals(DenseGrid.create(1, 1)));
+        assertEquals(false, test.equals(null));
+        assertEquals(false, test.equals(""));
         
-        assertEquals(test.hashCode(), test.cells().hashCode());
+        assertEquals(test.cells().hashCode(), test.hashCode());
     }
 
     @SuppressWarnings("unlikely-arg-type")
+    @Test
     public void test_equalsHashCode_1x2() {
         ImmutableGrid<String> test = ImmutableGrid.of(1, 2);
-        assertEquals(test.equals(test), true);
-        assertEquals(test.equals(ImmutableGrid.of(1, 2)), true);
-        assertEquals(test.equals(SparseGrid.create(1, 2)), true);
-        assertEquals(test.equals(SparseGrid.create(1, 1)), false);
-        assertEquals(test.equals(DenseGrid.create(1, 2)), true);
-        assertEquals(test.equals(DenseGrid.create(1, 1)), false);
-        assertEquals(test.equals(null), false);
-        assertEquals(test.equals(""), false);
+        assertEquals(true, test.equals(test));
+        assertEquals(true, test.equals(ImmutableGrid.of(1, 2)));
+        assertEquals(true, test.equals(SparseGrid.create(1, 2)));
+        assertEquals(false, test.equals(SparseGrid.create(1, 1)));
+        assertEquals(true, test.equals(DenseGrid.create(1, 2)));
+        assertEquals(false, test.equals(DenseGrid.create(1, 1)));
+        assertEquals(false, test.equals(null));
+        assertEquals(false, test.equals(""));
         
-        assertEquals(test.hashCode(), 1 ^ Integer.rotateLeft(2, 16) ^ test.cells().hashCode());
+        assertEquals(1 ^ Integer.rotateLeft(2, 16) ^ test.cells().hashCode(), test.hashCode());
     }
 
     //-----------------------------------------------------------------------
     @SuppressWarnings("deprecation")
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_immutable_clear() {
         ImmutableGrid<String> test = ImmutableGrid.of();
         test.clear();
     }
 
     @SuppressWarnings("deprecation")
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_immutable_put() {
         ImmutableGrid<String> test = ImmutableGrid.of();
         test.put(0, 0, "Hello");
     }
 
     @SuppressWarnings("deprecation")
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_immutable_putAll() {
         ImmutableGrid<String> test = ImmutableGrid.of();
         test.putAll(ImmutableGrid.<String>of());
     }
 
     @SuppressWarnings("deprecation")
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_immutable_remove() {
         ImmutableGrid<String> test = ImmutableGrid.of();
         test.remove(0, 0);

@@ -15,14 +15,13 @@
  */
 package org.joda.collect.grid;
 
-import static org.testng.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 /**
  * Test DenseGrid.
  */
-@Test
 public class TestDenseGrid extends AbstractTestMutableGrid {
 
     @Override
@@ -41,6 +40,7 @@ public class TestDenseGrid extends AbstractTestMutableGrid {
     }
 
     //-----------------------------------------------------------------------
+    @Test
     public void test_create_Grid_fromDenseImutable() {
         SparseGrid<String> base = SparseGrid.create(2, 2);
         base.put(0, 0, "Hello");
@@ -50,6 +50,7 @@ public class TestDenseGrid extends AbstractTestMutableGrid {
         checkGrid(test, 0, 0, "Hello", 1, 0, "World");
     }
 
+    @Test
     public void test_create_array2D() {
         String[][] array = new String[][] {
                 {"Hello", "World"},
@@ -59,40 +60,43 @@ public class TestDenseGrid extends AbstractTestMutableGrid {
         checkGrid(test, 0, 0, "Hello", 0, 1, "World");
     }
 
+    @Test
     public void test_create_array2D_empty() {
         String[][] array = new String[][] {};
         DenseGrid<String> test = DenseGrid.create(array);
         checkGrid(test);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void test_create_array2D_null() {
         DenseGrid.create((String[][]) null);
     }
 
     //-----------------------------------------------------------------------
+    @Test
     public void test_rowCount_columnCount() {
         Grid<String> test = create3x3();
         test.put(0, 0, "Hello");
         test.put(0, 1, "World");
-        assertEquals(test.rowCount(), 3);
-        assertEquals(test.columnCount(), 3);
+        assertEquals(3, test.rowCount());
+        assertEquals(3, test.columnCount());
     }
 
+    @Test
     public void test_rowCount_columnCount_empty() {
         Grid<String> test = create3x3();
-        assertEquals(test.rowCount(), 3);
-        assertEquals(test.columnCount(), 3);
+        assertEquals(3, test.rowCount());
+        assertEquals(3, test.columnCount());
     }
 
     //-----------------------------------------------------------------------
-    @Test(expectedExceptions = IndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void test_put_rowTooBig() {
         DenseGrid<String> test = DenseGrid.create(2, 2);
         test.put(3, 1, "Hello");
     }
 
-    @Test(expectedExceptions = IndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void test_put_columnTooBig() {
         DenseGrid<String> test = DenseGrid.create(2, 2);
         test.put(1, 3, "Hello");

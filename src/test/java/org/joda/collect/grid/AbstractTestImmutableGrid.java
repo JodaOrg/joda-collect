@@ -18,7 +18,7 @@ package org.joda.collect.grid;
 import java.util.Iterator;
 
 import org.joda.collect.grid.Grid.Cell;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 /**
  * Test abstract Grid.
@@ -29,31 +29,31 @@ public abstract class AbstractTestImmutableGrid extends AbstractTestGrid {
 
     //-----------------------------------------------------------------------
     @SuppressWarnings("deprecation")
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_immutable_clear() {
         createNonEmpty().clear();
     }
 
     @SuppressWarnings("deprecation")
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_immutable_put() {
         createNonEmpty().put(0, 0, "Hello");
     }
 
     @SuppressWarnings("deprecation")
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_immutable_putAll() {
         createNonEmpty().putAll(ImmutableGrid.<String>of());
     }
 
     @SuppressWarnings("deprecation")
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_immutable_remove() {
         createNonEmpty().remove(0, 0);
     }
 
     //-----------------------------------------------------------------------
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_cells_add() {
         ImmutableGrid<String> test = createNonEmpty();
         Iterator<Cell<String>> it = test.cells().iterator();
@@ -61,23 +61,23 @@ public abstract class AbstractTestImmutableGrid extends AbstractTestGrid {
         it.remove();
     }
 
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_cells_remove() {
         createNonEmpty().cells().add(ImmutableCell.of(0, 0, "Rejected"));
     }
 
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_cells_clear() {
         createNonEmpty().cells().clear();
     }
 
     //-----------------------------------------------------------------------
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_rows_clear() {
         createNonEmpty().rows().clear();
     }
 
-    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void test_columns_clear() {
         createNonEmpty().rows().clear();
     }
