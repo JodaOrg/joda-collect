@@ -194,7 +194,7 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
                 }
                 @Override
                 public Cell<V> next() {
-                    if (hasNext() == false) {
+                    if (!hasNext()) {
                         throw new NoSuchElementException("No more elements");
                     }
                     current++;

@@ -146,7 +146,7 @@ public final class SparseGrid<V> extends AbstractGrid<V> implements Serializable
 
     @Override
     public void put(int row, int column, V value) {
-        if (exists(row, column) == false) {
+        if (!exists(row, column)) {
             throw new IndexOutOfBoundsException("Invalid row-column: " + row + "," + column);
         }
         Cell<V> cell = ImmutableCell.of(row, column, value);

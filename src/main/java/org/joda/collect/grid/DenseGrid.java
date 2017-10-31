@@ -240,7 +240,7 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
                 }
                 @Override
                 public Cell<V> next() {
-                    if (hasNext() == false) {
+                    if (!hasNext()) {
                         throw new NoSuchElementException("No more elements");
                     }
                     current++;
@@ -404,7 +404,7 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
 
     @Override
     public void put(int row, int column, V value) {
-        if (exists(row, column) == false) {
+        if (!exists(row, column)) {
             throw new IndexOutOfBoundsException("Invalid row-column: " + row + "," + column);
         }
         if (value == null) {

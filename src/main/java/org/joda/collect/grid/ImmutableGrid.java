@@ -105,7 +105,7 @@ public abstract class ImmutableGrid<V> extends AbstractGrid<V> {
         if (cells == null) {
             throw new IllegalArgumentException("Cells must not be null");
         }
-        if (cells.iterator().hasNext() == false) {
+        if (!cells.iterator().hasNext()) {
             return new EmptyGrid<R>(rowCount, columnCount);
         }
         return new SparseImmutableGrid<R>(rowCount, columnCount, cells);
@@ -125,7 +125,7 @@ public abstract class ImmutableGrid<V> extends AbstractGrid<V> {
         if (cells == null) {
             throw new IllegalArgumentException("Cells must not be null");
         }
-        if (cells.iterator().hasNext() == false) {
+        if (!cells.iterator().hasNext()) {
             return new EmptyGrid<R>();
         }
         int rowCount = 0;
