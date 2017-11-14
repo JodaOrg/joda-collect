@@ -32,7 +32,7 @@ There are no full releases yet!
 The code is fully tested, but there may yet be bugs and the API may yet change.
 There should be no great reason why it cannot be used in production if you can cope with future API change.
 
-Joda-Collect runs on JDK 1.6 or later and requires [Google-Guava](http://code.google.com/p/guava-libraries/).
+Joda-Collect runs on Java SE 8 or later and requires [Google-Guava](http://code.google.com/p/guava-libraries/).
 
 Available in the [Maven Central repository](http://search.maven.org/#artifactdetails|org.joda|joda-collect|0.8|jar)
 

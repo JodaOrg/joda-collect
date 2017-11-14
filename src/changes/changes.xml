@@ -8,8 +8,12 @@
   <body>
 
     <!-- types are add, fix, remove, update -->
-    <release version="0.8.1" date="SNAPSHOT" description="v0.8.1">
+    <release version="1.0" date="SNAPSHOT" description="v1.0">
       <action dev="jodastephen" type="add">
+        Update and redesign build to support Java 9.
+        Switch to require Java 8.
+      </action>
+      <action dev="jodastephen" type="update">
         Switch from TestNG to JUnit4.
       </action>
     </release>

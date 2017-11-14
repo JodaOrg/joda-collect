@@ -36,7 +36,7 @@ There are no full releases yet!
 The code is fully tested, but there may yet be bugs and the API may yet change.
 There should be no great reason why it cannot be used in production if you can cope with future API change.
 
-Joda-Collect requires Java SE 6 or later and [depends](dependencies.html) on Google Guava.
+Joda-Collect requires Java SE 8 or later and [depends](dependencies.html) on Google Guava.
 
 Available in [Maven Central](http://search.maven.org/#artifactdetails%7Corg.joda%7Cjoda-collect%7C0.8%7Cjar).
 
