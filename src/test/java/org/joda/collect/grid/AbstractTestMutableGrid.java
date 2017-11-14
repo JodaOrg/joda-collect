@@ -481,7 +481,6 @@ public abstract class AbstractTestMutableGrid extends AbstractTestGrid {
 
     //-----------------------------------------------------------------------
     @Test
-    @SuppressWarnings("unchecked")
     public void test_cells_addAll() {
         Grid<String> test = create3x3();
         test.put(0, 0, "Hello");
