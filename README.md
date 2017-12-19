@@ -44,5 +44,5 @@ Please use GitHub issues and Pull Requests for support.
 ### Release process
 
 * Ensure everything is ready to release
-* `mvn clean release:prepare release:perform`
+* `mvn clean release:clean release:prepare release:perform`
 * Website will be built and released by Travis
