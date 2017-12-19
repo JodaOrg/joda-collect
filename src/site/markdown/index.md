@@ -32,19 +32,19 @@ Various documentation is available:
 ## <i></i> Releases
 
 There are no full releases yet!
-[Release 0.8](download.html) is the current development release intended for feedback.
+[Release 1.0](download.html) is the current development release intended for feedback.
 The code is fully tested, but there may yet be bugs and the API may yet change.
 There should be no great reason why it cannot be used in production if you can cope with future API change.
 
 Joda-Collect requires Java SE 8 or later and [depends](dependencies.html) on Google Guava.
 
-Available in [Maven Central](http://search.maven.org/#artifactdetails%7Corg.joda%7Cjoda-collect%7C0.8%7Cjar).
+Available in [Maven Central](http://search.maven.org/#artifactdetails%7Corg.joda%7Cjoda-collect%7C1.0%7Cjar).
 
 ```xml
 <dependency>
   <groupId>org.joda</groupId>
   <artifactId>joda-collect</artifactId>
-  <version>0.8</version>
+  <version>1.0</version>
 </dependency>
 ```
 
