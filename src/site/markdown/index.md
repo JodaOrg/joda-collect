@@ -31,17 +31,17 @@ Various documentation is available:
 
 ## <i></i> Releases
 
-[Release 1.0](download.html) is the current development release intended for feedback.
+[Release 1.0.1](download.html) is the current development release intended for feedback.
 This release is considered stable and worthy of the 1.x tag.
 It depends on Java SE 8 or later and [depends](dependencies.html) on Google Guava.
 
-Available in [Maven Central](http://search.maven.org/#artifactdetails%7Corg.joda%7Cjoda-collect%7C1.0%7Cjar).
+Available in [Maven Central](http://search.maven.org/#artifactdetails%7Corg.joda%7Cjoda-collect%7C1.0.1%7Cjar).
 
 ```xml
 <dependency>
   <groupId>org.joda</groupId>
   <artifactId>joda-collect</artifactId>
-  <version>1.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 

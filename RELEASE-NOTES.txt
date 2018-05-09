@@ -3,7 +3,7 @@ Joda-Collect
 ================================================
 Joda-Collect provides collections that are not present in the JDK or [Google Guava](http://code.google.com/p/guava-libraries/).
 
-The release runs on JDK 6 or later.
+The release runs on JDK 8 or later.
 
 See http://www.joda.org/joda-collect/changes-report.html for changes
 

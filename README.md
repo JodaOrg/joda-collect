@@ -27,11 +27,11 @@ Various documentation is available:
 
 
 ### Releases
-[Release 1.0](http://www.joda.org/joda-collect/download.html) is the current latest release.
+[Release 1.0.1](http://www.joda.org/joda-collect/download.html) is the current latest release.
 This release is considered stable and worthy of the 1.x tag.
 It depends on Java SE 8 or later and requires [Google-Guava](http://code.google.com/p/guava-libraries/).
 
-Available in the [Maven Central repository](http://search.maven.org/#artifactdetails|org.joda|joda-collect|1.0|jar)
+Available in the [Maven Central repository](http://search.maven.org/#artifactdetails|org.joda|joda-collect|1.0.1|jar)
 
 
 ### Support
