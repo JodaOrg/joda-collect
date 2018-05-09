@@ -8,13 +8,13 @@
   <parent>
     <groupId>org.joda</groupId>
     <artifactId>joda-parent</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.4</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>joda-collect</artifactId>
   <packaging>jar</packaging>
   <name>Joda-Collect</name>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
   <description>Additional collections</description>
   <url>http://www.joda.org/${joda.artifactId}/</url>
 
@@ -48,7 +48,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>23.2-jre</version>
+      <version>25.0-jre</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
