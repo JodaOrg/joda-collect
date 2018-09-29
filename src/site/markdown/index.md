@@ -1,12 +1,12 @@
 ## <i></i> About
 
 **Joda-Collect** provides collections that are not present in the JDK or
-[Google Guava](http://code.google.com/p/guava-libraries/).
+[Google Guava](https://github.com/google/guava).
 
 The JDK and Guava contain many collection classes, but occasionally there is something missing.
 This project provides a home for those collections.
 
-Joda-Collect is licensed under the business-friendly [Apache 2.0 licence](license.html).
+Joda-Collect is licensed under the business-friendly [Apache 2.0 licence](licenses.html).
 
 
 ## <i></i> Features
@@ -35,7 +35,7 @@ Various documentation is available:
 This release is considered stable and worthy of the 1.x tag.
 It depends on Java SE 8 or later and [depends](dependencies.html) on Google Guava.
 
-Available in [Maven Central](http://search.maven.org/#artifactdetails%7Corg.joda%7Cjoda-collect%7C1.0.1%7Cjar).
+Available in [Maven Central](https://search.maven.org/search?q=g:org.joda%20AND%20a:joda-collect&core=gav).
 
 ```xml
 <dependency>

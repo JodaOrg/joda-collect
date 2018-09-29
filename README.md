@@ -1,12 +1,12 @@
 Joda-Collect
 ------------
 
-Joda-Collect provides collections that are not present in the JDK or [Google Guava](http://code.google.com/p/guava-libraries/).
+Joda-Collect provides collections that are not present in the JDK or [Google Guava](https://github.com/google/guava).
 
-The project is related to [Joda-Primitives](http://www.joda.org/joda-primitives/) which provides primitive versions of the collection interfaces.
+The project is related to [Joda-Primitives](https://www.joda.org/joda-primitives/) which provides primitive versions of the collection interfaces.
 This project is separate, as the use cases are likely to be different.
 
-Joda-Collect is licensed under the business-friendly [Apache 2.0 licence](http://www.joda.org/joda-collect/license.html).
+Joda-Collect is licensed under the business-friendly [Apache 2.0 licence](https://www.joda.org/joda-collect/licenses.html).
 
 
 ### Contents
@@ -21,17 +21,17 @@ Mutable and immutable implementations are provided in sparse and dense variation
 ### Documentation
 Various documentation is available:
 
-* The [home page](http://www.joda.org/joda-collect/)
-* The [Javadoc](http://www.joda.org/joda-collect/apidocs/index.html)
-* The change notes for the [releases](http://www.joda.org/joda-collect/changes-report.html)
+* The [home page](https://www.joda.org/joda-collect/)
+* The [Javadoc](https://www.joda.org/joda-collect/apidocs/index.html)
+* The change notes for the [releases](https://www.joda.org/joda-collect/changes-report.html)
 
 
 ### Releases
-[Release 1.0.1](http://www.joda.org/joda-collect/download.html) is the current latest release.
+[Release 1.0.1](https://www.joda.org/joda-collect/download.html) is the current latest release.
 This release is considered stable and worthy of the 1.x tag.
-It depends on Java SE 8 or later and requires [Google-Guava](http://code.google.com/p/guava-libraries/).
+It depends on Java SE 8 or later and requires [Google-Guava](https://github.com/google/guava).
 
-Available in the [Maven Central repository](http://search.maven.org/#artifactdetails|org.joda|joda-collect|1.0.1|jar)
+Available in the [Maven Central repository](https://search.maven.org/search?q=g:org.joda%20AND%20a:joda-collect&core=gav)
 
 
 ### Support

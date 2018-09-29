@@ -1,11 +1,11 @@
 
 Joda-Collect
 ================================================
-Joda-Collect provides collections that are not present in the JDK or [Google Guava](http://code.google.com/p/guava-libraries/).
+Joda-Collect provides collections that are not present in the JDK or [Google Guava](https://github.com/google/guava).
 
 The release runs on JDK 8 or later.
 
-See http://www.joda.org/joda-collect/changes-report.html for changes
+See https://www.joda.org/joda-collect/changes-report.html for changes
 
 
 Feedback
