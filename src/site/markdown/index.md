@@ -49,9 +49,11 @@ Available in [Maven Central](https://search.maven.org/search?q=g:org.joda%20AND%
 
 ### Support
 
-Support on bugs, library usage or enhancement requests is available on a best efforts basis.
+Please use [Stack Overflow](https://stackoverflow.com/search?q=joda-collect) for general usage questions.
+GitHub [issues](https://github.com/JodaOrg/joda-collect/issues) and [pull requests](https://github.com/JodaOrg/joda-collect/pulls)
+should be used when you want to help advance the project.
+Commercial support is available via the
+[Tidelift subscription](https://tidelift.com/subscription/pkg/maven-org-joda-joda-collect?utm_source=maven-org-joda-joda-collect&utm_medium=referral&utm_campaign=website).
 
-To suggest enhancements or contribute, please [fork the source code](https://github.com/JodaOrg/joda-collect)
-on GitHub and send a Pull Request.
-
-Alternatively, use GitHub [issues](https://github.com/JodaOrg/joda-collect/issues).
+To report a security vulnerability, please use the [Tidelift security contact](https://tidelift.com/security).
+Tidelift will coordinate the fix and disclosure.
