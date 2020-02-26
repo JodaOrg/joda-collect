@@ -62,4 +62,4 @@ Tidelift will coordinate the fix and disclosure.
 * Update version (README.md, index.md, changes.xml)
 * Commit and push
 * `mvn clean release:clean release:prepare release:perform`
-* Website will be built and released by Travis
+* Website will be built and released by GitHub Actions
