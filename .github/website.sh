@@ -16,9 +16,9 @@ cp -R ../site joda-collect/
 echo "## update..."
 git add -A
 git status
-git commit --message "Update joda-beans from CI: $GITHUB_ACTION"
+git commit --message "Update joda-collect from CI: $GITHUB_ACTION"
 
 echo "## push..."
-git push origin master
+git push origin main
 
 echo "## done"

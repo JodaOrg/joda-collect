@@ -40,6 +40,26 @@
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
       </plugin>
+      <!-- Enforce Maven 3.6.0 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.6.0</version>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -48,8 +68,12 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>26.0-jre</version>
+      <version>31.1-jre</version>
       <exclusions>
+        <exclusion>
+          <groupId>com.google.guava</groupId>
+          <artifactId>listenablefuture</artifactId>
+        </exclusion>
         <exclusion>
           <groupId>com.google.errorprone</groupId>
           <artifactId>error_prone_annotations</artifactId>
@@ -79,7 +103,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.13.1</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
