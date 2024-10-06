@@ -19,8 +19,10 @@
  */
 module org.joda.collect {
 
-    // dependency on Guava - transient as Guava types are in Joda-Collect API
-    requires transitive com.google.common;
+    // dependency on Guava - should be transitive as Guava types are in Joda-Collect API
+    // but Guava is an automatic module, so 'requires transitive' is unwise
+    // the 'transitive' will be added if Guava becomes a fully defined module
+    requires com.google.common;
 
     // export all packages
     exports org.joda.collect.grid;

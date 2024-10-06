@@ -31,9 +31,14 @@ Various documentation is available:
 
 ## <i></i> Releases
 
-[Release 1.0.1](download.html) is the current development release intended for feedback.
-This release is considered stable and worthy of the 1.x tag.
-It depends on Java SE 8 or later and [depends](dependencies.html) on Google Guava.
+The 2.x branch (v2.0.0) is compatible with Java SE 21 or later.
+
+The 1.x branch (v1.0.1) is compatible with Java SE 8 or later.
+
+v2.x releases are compatible with v1.x releases - except for the Java SE version and `module-info.class` file.
+Guava is a required module, but it cannot be declared as 'transitive' because it is an automatic module.
+
+Joda-Collect [depends](dependencies.html) on Google Guava.
 
 Available in [Maven Central](https://search.maven.org/search?q=g:org.joda%20AND%20a:joda-collect&core=gav).
 
@@ -41,7 +46,7 @@ Available in [Maven Central](https://search.maven.org/search?q=g:org.joda%20AND%
 <dependency>
   <groupId>org.joda</groupId>
   <artifactId>joda-collect</artifactId>
-  <version>1.0.1</version>
+  <version>2.0.0</version>
 </dependency>
 ```
 

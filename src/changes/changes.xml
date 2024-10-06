@@ -8,7 +8,13 @@
   <body>
 
     <!-- types are add, fix, remove, update -->
-    <release version="1.0.2" date="SNAPSHOT" description="v1.0.2">
+    <release version="2.0.0" date="SNAPSHOT" description="v2.0.0">
+      <action dev="jodastephen" type="add">
+        Major version based on Java SE 21.
+        v2.x is compatible with v1.x with one exception - the module definition has changed slightly.
+        Guava is no longer transitively included (because it is an automatic module), and as such
+        end users may need to alter their module declaration to include Guava directly.
+      </action>
       <action dev="jodastephen" type="add">
         Add Tidelift commercial support and security policy.
       </action>

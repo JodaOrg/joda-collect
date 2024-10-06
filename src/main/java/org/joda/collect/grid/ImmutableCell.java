@@ -117,7 +117,8 @@ public final class ImmutableCell<V> extends AbstractCell<V> implements Serializa
      */
     ImmutableCell<V> validateCounts(int rowCount, int columnCount) {
         if (row >= rowCount || column >= columnCount) {
-            throw new IndexOutOfBoundsException("Invalid row-column: " + row + "," + column + " for grid " + rowCount + "x" + columnCount);
+            throw new IndexOutOfBoundsException(
+                    "Invalid row-column: " + row + "," + column + " for grid " + rowCount + "x" + columnCount);
         }
         return this;
     }

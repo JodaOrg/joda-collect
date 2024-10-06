@@ -21,4 +21,9 @@ git commit --message "Update joda-collect from CI: $GITHUB_ACTION"
 echo "## push..."
 git push origin main
 
+echo "## tidy..."
+cd ..
+git push --delete origin website || true
+git push --delete origin website2x || true
+
 echo "## done"
