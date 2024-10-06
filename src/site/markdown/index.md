@@ -51,7 +51,7 @@ Java module name: `org.joda.collect`.
 
 ### For Enterprise
 
-[Available as part of the Tidelift Subscription](https://tidelift.com/subscription/pkg/maven-org-joda-joda-money?utm_source=maven-org-joda-joda-money&utm_medium=referral&utm_campaign=enterprise).
+[Available as part of the Tidelift Subscription](https://tidelift.com/subscription/pkg/maven-org-joda-joda-collect?utm_source=maven-org-joda-joda-collect&utm_medium=referral&utm_campaign=enterprise).
 
 Joda and the maintainers of thousands of other packages are working with Tidelift to deliver one
 enterprise subscription that covers all of the open source you use.
