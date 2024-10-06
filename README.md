@@ -27,9 +27,14 @@ Various documentation is available:
 
 
 ### Releases
-[Release 1.0.1](https://www.joda.org/joda-collect/download.html) is the current latest release.
-This release is considered stable and worthy of the 1.x tag.
-It depends on Java SE 8 or later and requires [Google-Guava](https://github.com/google/guava).
+The 2.x branch is compatible with Java SE 21 or later.
+
+The 1.x branch is compatible with Java SE 8 or later.
+
+v2.x releases are compatible with v1.x releases - except for the Java SE version and `module-info.class` file.
+Guava is a required module, but it cannot be declared as 'transitive' because it is an automatic module.
+
+Joda-Collect depends on [Google-Guava](https://github.com/google/guava).
 
 Available in the [Maven Central repository](https://search.maven.org/search?q=g:org.joda%20AND%20a:joda-collect&core=gav)
 
@@ -59,7 +64,9 @@ Tidelift will coordinate the fix and disclosure.
 
 ### Release process
 
-* Update version (README.md, index.md, changes.xml)
+* Update version (index.md, changes.xml)
 * Commit and push
+* Switch to Java 21
 * `mvn clean release:clean release:prepare release:perform`
+* `git fetch`
 * Website will be built and released by GitHub Actions
