@@ -19,7 +19,7 @@
  */
 module org.joda.collect {
 
-    // dependency on Guava - transient as Guava types are in Joda-Convert API
+    // dependency on Guava - transient as Guava types are in Joda-Collect API
     requires transitive com.google.common;
 
     // export all packages
