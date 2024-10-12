@@ -23,6 +23,8 @@ git push origin main
 
 echo "## tidy..."
 cd ..
+git clone https://${GITHUB_TOKEN}@github.com/JodaOrg/joda-collect.git
+cd joda-collect
 git push --delete origin website || true
 git push --delete origin website2x || true
 
