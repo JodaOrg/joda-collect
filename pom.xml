@@ -647,8 +647,8 @@
     <!-- Common control parameters -->
     <joda.osgi.packages>org.joda.collect.*</joda.osgi.packages>
     <joda.osgi.require.capability>osgi.ee;filter:="(&amp;(osgi.ee=JavaSE)(version=${maven.compiler.release}))"</joda.osgi.require.capability>
-    <joda.publish.auto>false</joda.publish.auto><!-- false/true -->
-    <joda.publish.wait>validated</joda.publish.wait><!-- validated/published -->
+    <joda.publish.auto>true</joda.publish.auto><!-- false/true -->
+    <joda.publish.wait>published</joda.publish.wait><!-- validated/published -->
 
     <!-- Plugin version numbers -->
     <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
