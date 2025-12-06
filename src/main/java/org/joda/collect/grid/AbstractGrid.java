@@ -15,17 +15,16 @@
  */
 package org.joda.collect.grid;
 
-import java.util.AbstractList;
-import java.util.List;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
+import java.util.AbstractList;
+import java.util.List;
 
 /**
  * Abstract implementation of the {@code Grid} data structure.
- * 
+ *
  * @param <V> the type of the value
  * @author Stephen Colebourne
  */
@@ -33,7 +32,7 @@ abstract class AbstractGrid<V> implements Grid<V> {
 
     /**
      * Validates the row and column counts.
-     * 
+     *
      * @param rowCount  the row count
      * @param columnCount  the column count
      */
@@ -82,7 +81,7 @@ abstract class AbstractGrid<V> implements Grid<V> {
 
     @Override
     public boolean containsValue(Object valueToFind) {
-        return (valueToFind != null ? values().contains(valueToFind) : false);
+        return (valueToFind != null && values().contains(valueToFind));
     }
 
     @Override
@@ -117,23 +116,23 @@ abstract class AbstractGrid<V> implements Grid<V> {
     @Override
     public List<V> row(int row) {
         Preconditions.checkElementIndex(row, rowCount(), "Row index");
-        return new Inner<V>(this, columnCount(), row, true);
+        return new Inner<>(this, columnCount(), row, true);
     }
 
     @Override
     public List<List<V>> rows() {
-        return new Outer<V>(this, rowCount(), columnCount(), true);
+        return new Outer<>(this, rowCount(), columnCount(), true);
     }
 
     @Override
     public List<V> column(int column) {
         Preconditions.checkElementIndex(column, columnCount(), "Column index");
-        return new Inner<V>(this, rowCount(), column, false);
+        return new Inner<>(this, rowCount(), column, false);
     }
 
     @Override
     public List<List<V>> columns() {
-        return new Outer<V>(this, columnCount(), rowCount(), false);
+        return new Outer<>(this, columnCount(), rowCount(), false);
     }
 
     static class Outer<V> extends AbstractList<List<V>> {
@@ -157,7 +156,7 @@ abstract class AbstractGrid<V> implements Grid<V> {
         @Override
         public List<V> get(int index) {
             Preconditions.checkElementIndex(index, size);
-            return new Inner<V>(grid, innerSize, index, rows);
+            return new Inner<>(grid, innerSize, index, rows);
         }
     }
 
@@ -211,7 +210,7 @@ abstract class AbstractGrid<V> implements Grid<V> {
 
     //-----------------------------------------------------------------------
     Cell<V> finder(int row, int column) {
-        @SuppressWarnings({ "unchecked", "rawtypes" })
+        @SuppressWarnings({"unchecked", "rawtypes"})
         Cell<V> finder = new ImmutableCell(row, column, "");
         return finder;
     }
@@ -219,16 +218,11 @@ abstract class AbstractGrid<V> implements Grid<V> {
     //-----------------------------------------------------------------------
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (obj instanceof Grid) {
-            Grid<?> other = (Grid<?>) obj;
-            return rowCount() == other.rowCount() &&
-                    columnCount() == other.columnCount() &&
-                    cells().equals(other.cells());
-        }
-        return false;
+        return obj == this ||
+                (obj instanceof Grid<?> other &&
+                        rowCount() == other.rowCount() &&
+                        columnCount() == other.columnCount() &&
+                        cells().equals(other.cells()));
     }
 
     @Override

@@ -15,6 +15,11 @@
  */
 package org.joda.collect.grid;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableCollection;
+import com.google.common.collect.ImmutableList;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.AbstractSet;
@@ -24,22 +29,18 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableList;
-
 /**
  * Mutable implementation of the {@code Grid} data structure based on an array.
  * <p>
  * This uses one item of memory for each possible combination of row and column.
- * 
+ *
  * @param <V> the type of the value
  * @author Stephen Colebourne
  */
 public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable {
 
     /** Serialization version. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -62,14 +63,14 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
     //-----------------------------------------------------------------------
     /**
      * Creates an empty {@code DenseGrid} of the specified size.
-     * 
+     *
      * @param <V> the type of the value
      * @param rowCount  the number of rows, zero or greater
      * @param columnCount  the number of rows, zero or greater
      * @return the mutable grid, not null
      */
     public static <V> DenseGrid<V> create(int rowCount, int columnCount) {
-        return new DenseGrid<V>(rowCount, columnCount);
+        return new DenseGrid<>(rowCount, columnCount);
     }
 
     /**
@@ -85,7 +86,7 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
             throw new IllegalArgumentException("Grid must not be null");
         }
         if (grid instanceof DenseImmutableGrid) {
-            return new DenseGrid<V>((DenseImmutableGrid<V>) grid);
+            return new DenseGrid<>((DenseImmutableGrid<V>) grid);
         }
         DenseGrid<V> created = DenseGrid.create(grid.rowCount(), grid.columnCount());
         created.putAll(grid);
@@ -108,7 +109,7 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
         }
         int rowCount = array.length;
         if (rowCount == 0) {
-            return new DenseGrid<V>(0, 0);
+            return new DenseGrid<>(0, 0);
         }
         int columnCount = array[0].length;
         for (int i = 1; i < rowCount; i++) {
@@ -203,7 +204,7 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
     //-----------------------------------------------------------------------
     @Override
     public Set<Cell<V>> cells() {
-        return new Cells<V>(this);
+        return new Cells<>(this);
     }
 
     /**
@@ -229,8 +230,8 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
 
         @Override
         public Iterator<Cell<V>> iterator() {
-            return new Iterator<Cell<V>>() {
-                private MutableCell<V> cell = new MutableCell<V>();
+            return new Iterator<>() {
+                private final MutableCell<V> cell = new MutableCell<>();
                 private int count;
                 private int current = -1;
 
@@ -244,7 +245,7 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
                         throw new NoSuchElementException("No more elements");
                     }
                     current++;
-                    for ( ; current < grid.values.length; current++) {
+                    for (; current < grid.values.length; current++) {
                         if (grid.values[current] != null) {
                             break;
                         }
@@ -308,23 +309,23 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
     public List<V> row(int row) {
         Preconditions.checkElementIndex(row, rowCount(), "Row index");
         int base = row * rowCount;
-        return new Inner<V>(this, base, columnCount, 1);
+        return new Inner<>(this, base, columnCount, 1);
     }
 
     @Override
     public List<List<V>> rows() {
-        return new Outer<V>(this, rowCount, columnCount, columnCount, 1);
+        return new Outer<>(this, rowCount, columnCount, columnCount, 1);
     }
 
     @Override
     public List<V> column(int column) {
         Preconditions.checkElementIndex(column, columnCount(), "Column index");
-        return new Inner<V>(this, column, rowCount, columnCount);
+        return new Inner<>(this, column, rowCount, columnCount);
     }
 
     @Override
     public List<List<V>> columns() {
-        return new Outer<V>(this, columnCount, 1, rowCount, columnCount);
+        return new Outer<>(this, columnCount, 1, rowCount, columnCount);
     }
 
     static class Outer<V> extends AbstractList<List<V>> {
@@ -351,7 +352,7 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
         public List<V> get(int index) {
             Preconditions.checkElementIndex(index, size);
             int base = index * gap;
-            return new Inner<V>(grid, base, innerSize, innerGap);
+            return new Inner<>(grid, base, innerSize, innerGap);
         }
     }
 
@@ -441,7 +442,7 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
     //-----------------------------------------------------------------------
     /**
      * Returns a clone of the internal array.
-     * 
+     *
      * @return the array, not null
      */
     V[] valuesArray() {
@@ -451,14 +452,8 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
     //-----------------------------------------------------------------------
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (obj instanceof DenseGrid) {
-            DenseGrid<?> other = (DenseGrid<?>) obj;
-            return Arrays.equals(values, other.values);
-        }
-        return super.equals(obj);
+        return obj == this ||
+                (obj instanceof DenseGrid<?> other && Arrays.equals(values, other.values));
     }
 
     @Override

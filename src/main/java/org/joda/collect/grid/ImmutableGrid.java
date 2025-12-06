@@ -17,7 +17,7 @@ package org.joda.collect.grid;
 
 /**
  * Immutable implementation of the {@code Grid} data structure.
- * 
+ *
  * @param <V> the type of the value
  * @author Stephen Colebourne
  */
@@ -25,42 +25,42 @@ public abstract class ImmutableGrid<V> extends AbstractGrid<V> {
 
     /**
      * Obtains an empty immutable grid with zero row-column count.
-     * 
+     *
      * @param <R> the type of the value
      * @return the empty immutable grid, not null
      */
     public static <R> ImmutableGrid<R> of() {
-        return new EmptyGrid<R>();
+        return new EmptyGrid<>();
     }
 
     /**
      * Obtains an empty immutable grid of the specified row-column count.
-     * 
+     *
      * @param <R> the type of the value
      * @param rowCount  the number of rows, zero or greater
      * @param columnCount  the number of columns, zero or greater
      * @return the empty immutable grid, not null
      */
     public static <R> ImmutableGrid<R> of(int rowCount, int columnCount) {
-        return new EmptyGrid<R>(rowCount, columnCount);
+        return new EmptyGrid<>(rowCount, columnCount);
     }
 
     /**
      * Obtains an immutable grid with row-column count 1x1 and a single cell.
      * <p>
      * The single cell is at row zero column zero.
-     * 
+     *
      * @param <R> the type of the value
      * @param value  the value of the single cell, not null
      * @return the empty immutable grid, not null
      */
     public static <R> ImmutableGrid<R> of(R value) {
-        return new SingletonGrid<R>(1, 1, 0, 0, value);
+        return new SingletonGrid<>(1, 1, 0, 0, value);
     }
 
     /**
      * Obtains an immutable grid of the specified row-column count with a single cell.
-     * 
+     *
      * @param <R> the type of the value
      * @param rowCount  the number of rows, zero or greater
      * @param columnCount  the number of columns, zero or greater
@@ -70,13 +70,13 @@ public abstract class ImmutableGrid<V> extends AbstractGrid<V> {
      * @return the empty immutable grid, not null
      */
     public static <R> ImmutableGrid<R> of(int rowCount, int columnCount, int row, int column, R value) {
-        return new SingletonGrid<R>(rowCount, columnCount, row, column, value);
+        return new SingletonGrid<>(rowCount, columnCount, row, column, value);
     }
 
     //-----------------------------------------------------------------------
     /**
      * Obtains an immutable grid with one cell.
-     * 
+     *
      * @param <R> the type of the value
      * @param rowCount  the number of rows, zero or greater
      * @param columnCount  the number of columns, zero or greater
@@ -88,12 +88,12 @@ public abstract class ImmutableGrid<V> extends AbstractGrid<V> {
         if (cell == null) {
             throw new IllegalArgumentException("Cell must not be null");
         }
-        return new SingletonGrid<R>(rowCount, columnCount, cell);
+        return new SingletonGrid<>(rowCount, columnCount, cell);
     }
 
     /**
      * Obtains an immutable grid by copying a set of cells.
-     * 
+     *
      * @param <R> the type of the value
      * @param rowCount  the number of rows, zero or greater
      * @param columnCount  the number of columns, zero or greater
@@ -106,16 +106,16 @@ public abstract class ImmutableGrid<V> extends AbstractGrid<V> {
             throw new IllegalArgumentException("Cells must not be null");
         }
         if (!cells.iterator().hasNext()) {
-            return new EmptyGrid<R>(rowCount, columnCount);
+            return new EmptyGrid<>(rowCount, columnCount);
         }
-        return new SparseImmutableGrid<R>(rowCount, columnCount, cells);
+        return new SparseImmutableGrid<>(rowCount, columnCount, cells);
     }
 
     /**
      * Obtains an immutable grid by copying a set of cells, deriving the row and column count.
      * <p>
      * The row and column counts are calculated as the maximum row and column specified.
-     * 
+     *
      * @param <R> the type of the value
      * @param cells  the cells to copy, not null
      * @return the immutable grid, not null
@@ -126,7 +126,7 @@ public abstract class ImmutableGrid<V> extends AbstractGrid<V> {
             throw new IllegalArgumentException("Cells must not be null");
         }
         if (!cells.iterator().hasNext()) {
-            return new EmptyGrid<R>();
+            return new EmptyGrid<>();
         }
         int rowCount = 0;
         int columnCount = 0;
@@ -134,7 +134,7 @@ public abstract class ImmutableGrid<V> extends AbstractGrid<V> {
             rowCount = Math.max(rowCount, cell.getRow());
             columnCount = Math.max(columnCount, cell.getColumn());
         }
-        return new SparseImmutableGrid<R>(rowCount + 1, columnCount + 1, cells);
+        return new SparseImmutableGrid<>(rowCount + 1, columnCount + 1, cells);
     }
 
     //-----------------------------------------------------------------------
@@ -143,7 +143,7 @@ public abstract class ImmutableGrid<V> extends AbstractGrid<V> {
      * <p>
      * If you need to change the row-column count, use {@link #copyOf(int, int, Iterable)}
      * passing in the set of cells from the grid.
-     * 
+     *
      * @param <R> the type of the value
      * @param grid  the grid to copy, not null
      * @return the immutable grid, not null
@@ -157,17 +157,17 @@ public abstract class ImmutableGrid<V> extends AbstractGrid<V> {
             return (ImmutableGrid<R>) grid;
         }
         validateCounts(grid.rowCount(), grid.columnCount());
-        if (grid.size() == 0) {
-            return new EmptyGrid<R>(grid.rowCount(), grid.columnCount());
+        if (grid.isEmpty()) {
+            return new EmptyGrid<>(grid.rowCount(), grid.columnCount());
         }
         if (grid.size() == 1) {
             Cell<R> cell = grid.cells().iterator().next();
-            return new SingletonGrid<R>(grid.rowCount(), grid.columnCount(), cell);
+            return new SingletonGrid<>(grid.rowCount(), grid.columnCount(), cell);
         }
         if (grid.size() >= (grid.rowCount() * grid.columnCount() / 2)) {
             return DenseImmutableGrid.create(grid);
         }
-        return new SparseImmutableGrid<R>(grid);
+        return new SparseImmutableGrid<>(grid);
     }
 
     //-----------------------------------------------------------------------

@@ -15,17 +15,19 @@
  */
 package org.joda.collect.grid;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * Immutable implementations of the {@code Grid.Cell} data structure.
- * 
+ *
  * @param <V> the type of the value
  * @author Stephen Colebourne
  */
 final class MutableCell<V> extends AbstractCell<V> implements Serializable {
 
     /** Serialization version. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -66,7 +68,7 @@ final class MutableCell<V> extends AbstractCell<V> implements Serializable {
 
     /**
      * Sets the content of the cell.
-     * 
+     *
      * @param row  the row index
      * @param column  the column index
      * @param value  the value

@@ -15,20 +15,21 @@
  */
 package org.joda.collect.grid;
 
-import java.io.Serializable;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * Immutable implementation of the {@code Grid} data structure storing one cell.
- * 
+ *
  * @param <V> the type of the value
  * @author Stephen Colebourne
  */
 final class SingletonGrid<V> extends ImmutableGrid<V> implements Serializable {
 
     /** Serialization version. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -104,7 +105,7 @@ final class SingletonGrid<V> extends ImmutableGrid<V> implements Serializable {
     //-----------------------------------------------------------------------
     @Override
     public ImmutableSet<Cell<V>> cells() {
-        return ImmutableSet.<Cell<V>>of(cell);
+        return ImmutableSet.of(cell);
     }
 
     @Override

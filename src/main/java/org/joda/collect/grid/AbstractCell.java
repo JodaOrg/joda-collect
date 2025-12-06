@@ -15,15 +15,13 @@
  */
 package org.joda.collect.grid;
 
-import java.util.Comparator;
-
-import org.joda.collect.grid.Grid.Cell;
-
 import com.google.common.base.Objects;
+import java.util.Comparator;
+import org.joda.collect.grid.Grid.Cell;
 
 /**
  * Abstract implementation of the {@code Grid.Cell} data structure.
- * 
+ *
  * @param <V> the type of the value
  * @author Stephen Colebourne
  */
@@ -31,31 +29,19 @@ abstract class AbstractCell<V> implements Cell<V> {
 
     /**
      * Compare by row then column.
-     * 
+     *
      * @param <R> the type of the value
      * @return the comparator, not null
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    static final <R> Comparator<Cell<R>> comparator() {
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    static <R> Comparator<Cell<R>> comparator() {
         return (Comparator<Cell<R>>) (Comparator) COMPARATOR;
     }
     /**
      * Compare by row then column.
      */
-    private static final Comparator<Cell<?>> COMPARATOR = new Comparator<Cell<?>>() {
-        @Override
-        public int compare(Cell<?> cell1, Cell<?> cell2) {
-            int thisRow = cell1.getRow();
-            int otherRow = cell2.getRow();
-            int cmp = (thisRow < otherRow ? -1 : (thisRow > otherRow ? 1 : 0));
-            if (cmp == 0) {
-                int thisCol = cell1.getColumn();
-                int otherCol = cell2.getColumn();
-                cmp = (thisCol < otherCol ? -1 : (thisCol > otherCol ? 1 : 0));
-            }
-            return cmp;
-        }
-    };
+    private static final Comparator<Cell<?>> COMPARATOR =
+            Comparator.comparingInt((Cell<?> cell) -> cell.getRow()).thenComparingInt(Cell::getColumn);
 
     //-----------------------------------------------------------------------
     /**
@@ -78,15 +64,10 @@ abstract class AbstractCell<V> implements Cell<V> {
     //-----------------------------------------------------------------------
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (obj instanceof Cell) {
-            Cell<?> other = (Cell<?>) obj;
-            return getRow() == other.getRow() && getColumn() == other.getColumn()
-                    && Objects.equal(getValue(), other.getValue());
-        }
-        return false;
+        return obj == this ||
+                (obj instanceof Cell<?> other &&
+                        getRow() == other.getRow() && getColumn() == other.getColumn() &&
+                        Objects.equal(getValue(), other.getValue()));
     }
 
     @Override

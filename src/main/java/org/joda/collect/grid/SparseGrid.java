@@ -15,6 +15,8 @@
  */
 package org.joda.collect.grid;
 
+import com.google.common.collect.ForwardingSortedSet;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
@@ -22,17 +24,16 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import com.google.common.collect.ForwardingSortedSet;
-
 /**
  * Mutable implementation of the {@code Grid} data structure based on hashing.
- * 
+ *
  * @param <V> the type of the value
  * @author Stephen Colebourne
  */
 public final class SparseGrid<V> extends AbstractGrid<V> implements Serializable {
 
     /** Serialization version. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -51,14 +52,14 @@ public final class SparseGrid<V> extends AbstractGrid<V> implements Serializable
     //-----------------------------------------------------------------------
     /**
      * Creates an empty {@code SparseGrid} of the specified row-column count.
-     * 
+     *
      * @param <R> the type of the value
      * @param rowCount  the number of rows, zero or greater
      * @param columnCount  the number of columns, zero or greater
      * @return the mutable grid, not null
      */
     public static <R> SparseGrid<R> create(int rowCount, int columnCount) {
-        return new SparseGrid<R>(rowCount, columnCount, new TreeSet<Cell<R>>(AbstractCell.<R>comparator()));
+        return new SparseGrid<>(rowCount, columnCount, new TreeSet<>(AbstractCell.comparator()));
     }
 
     /**
@@ -109,7 +110,7 @@ public final class SparseGrid<V> extends AbstractGrid<V> implements Serializable
     public Cell<V> cell(int row, int column) {
         if (exists(row, column)) {
             SortedSet<Cell<V>> tail = cells.tailSet(finder(row, column));
-            if (tail.size() > 0) {
+            if (!tail.isEmpty()) {
                 Cell<V> cell = tail.first();
                 if (cell.getRow() == row && cell.getColumn() == column) {
                     return cell;
@@ -122,7 +123,7 @@ public final class SparseGrid<V> extends AbstractGrid<V> implements Serializable
     //-----------------------------------------------------------------------
     @Override
     public SortedSet<Cell<V>> cells() {
-        return new ForwardingSortedSet<Cell<V>>() {
+        return new ForwardingSortedSet<>() {
             @Override
             protected SortedSet<Cell<V>> delegate() {
                 return cells;
@@ -168,7 +169,7 @@ public final class SparseGrid<V> extends AbstractGrid<V> implements Serializable
     public boolean remove(int row, int column) {
         if (exists(row, column)) {
             Set<Cell<V>> tail = cells.tailSet(finder(row, column));
-            if (tail.size() > 0) {
+            if (!tail.isEmpty()) {
                 Iterator<Cell<V>> it = tail.iterator();
                 Cell<V> cell = it.next();
                 if (cell.getRow() == row && cell.getColumn() == column) {
