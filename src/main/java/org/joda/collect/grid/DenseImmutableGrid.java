@@ -323,7 +323,8 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
     @Override
     public boolean equals(Object obj) {
         return obj == this ||
-                (obj instanceof DenseImmutableGrid<?> other && Arrays.equals(values, other.values));
+                (obj instanceof DenseImmutableGrid<?> other && Arrays.equals(values, other.values)) ||
+                super.equals(obj);
     }
 
     @Override

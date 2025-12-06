@@ -453,7 +453,8 @@ public final class DenseGrid<V> extends AbstractGrid<V> implements Serializable 
     @Override
     public boolean equals(Object obj) {
         return obj == this ||
-                (obj instanceof DenseGrid<?> other && Arrays.equals(values, other.values));
+                (obj instanceof DenseGrid<?> other && Arrays.equals(values, other.values)) ||
+                super.equals(obj);
     }
 
     @Override
