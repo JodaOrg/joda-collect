@@ -15,19 +15,20 @@
  */
 package org.joda.collect.grid;
 
+import java.io.Serial;
 import java.io.Serializable;
-
 import org.joda.collect.grid.Grid.Cell;
 
 /**
  * Immutable implementations of the {@code Grid.Cell} data structure.
- * 
+ *
  * @param <V> the type of the value
  * @author Stephen Colebourne
  */
 public final class ImmutableCell<V> extends AbstractCell<V> implements Serializable {
 
     /** Serialization version. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -64,12 +65,12 @@ public final class ImmutableCell<V> extends AbstractCell<V> implements Serializa
         if (value == null) {
             throw new IllegalArgumentException("Value must not be null");
         }
-        return new ImmutableCell<R>(row, column, value);
+        return new ImmutableCell<>(row, column, value);
     }
 
     /**
      * Obtains an instance of {@code Cell}.
-     * 
+     *
      * @param <R> the type of the value
      * @param cell  the cell to copy, not null
      * @return the immutable cell, not null
@@ -83,7 +84,7 @@ public final class ImmutableCell<V> extends AbstractCell<V> implements Serializa
             ImmutableCell<R> result = (ImmutableCell<R>) cell;
             return result;
         }
-        return ImmutableCell.<R>of(cell.getRow(), cell.getColumn(), cell.getValue());
+        return ImmutableCell.of(cell.getRow(), cell.getColumn(), cell.getValue());
     }
 
     //-----------------------------------------------------------------------

@@ -15,6 +15,11 @@
  */
 package org.joda.collect.grid;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableCollection;
+import com.google.common.collect.ImmutableList;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.AbstractSet;
@@ -24,22 +29,18 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableList;
-
 /**
  * Immutable implementation of the {@code Grid} data structure based on an array.
  * <p>
  * This uses one item of memory for each possible combination of row and column.
- * 
+ *
  * @param <V> the type of the value
  * @author Stephen Colebourne
  */
 final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializable {
 
     /** Serialization version. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -70,7 +71,7 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
     @SuppressWarnings("unchecked")
     static <V> DenseImmutableGrid<V> create(Grid<? extends V> grid) {
         if (grid instanceof DenseGrid) {
-            return new DenseImmutableGrid<V>((DenseGrid<V>) grid);
+            return new DenseImmutableGrid<>((DenseGrid<V>) grid);
         }
         int rowCount = grid.rowCount();
         int columnCount = grid.columnCount();
@@ -79,7 +80,7 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
         for (Cell<? extends V> cell : grid.cells()) {
             values[cell.getRow() * columnCount + cell.getColumn()] = cell.getValue();
         }
-        return new DenseImmutableGrid<V>(rowCount, columnCount, grid.size(), values);
+        return new DenseImmutableGrid<>(rowCount, columnCount, grid.size(), values);
     }
 
     //-----------------------------------------------------------------------
@@ -157,7 +158,7 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
     //-----------------------------------------------------------------------
     @Override
     public Set<Cell<V>> cells() {
-        return new Cells<V>(this);
+        return new Cells<>(this);
     }
 
     /**
@@ -183,8 +184,8 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
 
         @Override
         public Iterator<Cell<V>> iterator() {
-            return new Iterator<Cell<V>>() {
-                private MutableCell<V> cell = new MutableCell<V>();
+            return new Iterator<>() {
+                private final MutableCell<V> cell = new MutableCell<>();
                 private int count;
                 private int current = -1;
 
@@ -198,7 +199,7 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
                         throw new NoSuchElementException("No more elements");
                     }
                     current++;
-                    for ( ; current < grid.values.length; current++) {
+                    for (; current < grid.values.length; current++) {
                         if (grid.values[current] != null) {
                             break;
                         }
@@ -235,23 +236,23 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
     public List<V> row(int row) {
         Preconditions.checkElementIndex(row, rowCount(), "Row index");
         int base = row * rowCount;
-        return new Inner<V>(this, base, columnCount, 1);
+        return new Inner<>(this, base, columnCount, 1);
     }
 
     @Override
     public List<List<V>> rows() {
-        return new Outer<V>(this, rowCount, columnCount, columnCount, 1);
+        return new Outer<>(this, rowCount, columnCount, columnCount, 1);
     }
 
     @Override
     public List<V> column(int column) {
         Preconditions.checkElementIndex(column, columnCount(), "Column index");
-        return new Inner<V>(this, column, rowCount, columnCount);
+        return new Inner<>(this, column, rowCount, columnCount);
     }
 
     @Override
     public List<List<V>> columns() {
-        return new Outer<V>(this, columnCount, 1, rowCount, columnCount);
+        return new Outer<>(this, columnCount, 1, rowCount, columnCount);
     }
 
     static class Outer<V> extends AbstractList<List<V>> {
@@ -278,7 +279,7 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
         public List<V> get(int index) {
             Preconditions.checkElementIndex(index, size);
             int base = index * gap;
-            return new Inner<V>(grid, base, innerSize, innerGap);
+            return new Inner<>(grid, base, innerSize, innerGap);
         }
     }
 
@@ -311,7 +312,7 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
     //-----------------------------------------------------------------------
     /**
      * Returns a clone of the internal array.
-     * 
+     *
      * @return the array, not null
      */
     V[] valuesArray() {
@@ -321,14 +322,9 @@ final class DenseImmutableGrid<V> extends ImmutableGrid<V> implements Serializab
     //-----------------------------------------------------------------------
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (obj instanceof DenseImmutableGrid) {
-            DenseImmutableGrid<?> other = (DenseImmutableGrid<?>) obj;
-            return Arrays.equals(values, other.values);
-        }
-        return super.equals(obj);
+        return obj == this ||
+                (obj instanceof DenseImmutableGrid<?> other && Arrays.equals(values, other.values)) ||
+                super.equals(obj);
     }
 
     @Override

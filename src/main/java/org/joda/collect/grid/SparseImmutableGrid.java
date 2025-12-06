@@ -15,24 +15,25 @@
  */
 package org.joda.collect.grid;
 
+import com.google.common.collect.ImmutableCollection;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-
 /**
  * Immutable implementation of the {@code Grid} data structure.
- * 
+ *
  * @param <V> the type of the value
  * @author Stephen Colebourne
  */
 final class SparseImmutableGrid<V> extends ImmutableGrid<V> implements Serializable {
 
     /** Serialization version. */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -69,7 +70,7 @@ final class SparseImmutableGrid<V> extends ImmutableGrid<V> implements Serializa
         this.rowCount = gridToCopy.rowCount();
         this.columnCount = gridToCopy.columnCount();
         validateCounts(rowCount, columnCount);
-        
+
         int size = gridToCopy.cells().size();
         keys = new long[size];
         cells = new Cell[size];
@@ -93,12 +94,12 @@ final class SparseImmutableGrid<V> extends ImmutableGrid<V> implements Serializa
         validateCounts(rowCount, columnCount);
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        
+
         Collection<Cell<V>> list;
         if (cells instanceof Collection) {
             list = (Collection<Cell<V>>) cells;
         } else {
-            list = new ArrayList<Cell<V>>();
+            list = new ArrayList<>();
             Iterables.addAll(list, cells);
         }
         int size = list.size();
