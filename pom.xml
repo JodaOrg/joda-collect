@@ -651,7 +651,7 @@
     <joda.publish.wait>published</joda.publish.wait><!-- validated/published -->
 
     <!-- Plugin version numbers -->
-    <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
+    <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
     <maven-bundle-plugin.version>6.0.0</maven-bundle-plugin.version>
     <maven-changes-plugin.version>2.12.1</maven-changes-plugin.version>
     <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version><!-- 3.6.0 fails in reporting -->
